@@ -89,15 +89,25 @@
 				<button type="button" class="btn btn-info" id="geoLocate">
 					Geolocate
 				</button>
-				<button type="button" class="btn btn-info">Hospitals</button>
-				<button type="button" class="btn btn-info">
+				<button type="button" class="btn btn-info" id="hospitalsMark">
+					Hospitals
+				</button>
+				<button
+					type="button"
+					class="btn btn-info"
+					id="fireStationsMark"
+				>
 					Fire Stations
 				</button>
 				<button type="button" class="btn btn-info" id="schoolMark">
 					Schools
 				</button>
-				<button type="button" class="btn btn-info">Waterfalls</button>
-				<button type="button" class="btn btn-dark">Clear</button>
+				<button type="button" class="btn btn-info" id="waterfallsMark">
+					Waterfalls
+				</button>
+				<button type="button" class="btn btn-dark" id="clearMarkers">
+					Clear
+				</button>
 			</div>
 			<div class="col-sm-4 col-md-4 col-lg-4" style="margin-left: 20%">
 				<div id="map"></div>
@@ -106,11 +116,15 @@
 			<div id="error"></div>
 		</div>
 
+		<script src="Hospitals.js"></script>
+		<script src="Fire_Stations.js"></script>
 		<script src="Educational_Institutions.js"></script>
-		<script src="map.js"></script>
+		<script src="City_Waterfalls.js"></script>
 		<script
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIU-UJB4YkPh50UN_naTNIFNzJDtTZZLU&callback=initMap&v=weekly"
 			async
+			defer
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIU-UJB4YkPh50UN_naTNIFNzJDtTZZLU&callback=initMap&v=weekly"
 		></script>
+		<script async src="map.js"></script>
 	</body>
 </html>
