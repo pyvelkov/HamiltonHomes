@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<head>
+  <title>Realtors</title>
+  <script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+			crossorigin="anonymous"
+		></script>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+			crossorigin="anonymous"
+		/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <style>
+    td {border: 1px solid black;}
+  </style>
+</head>
+<body class="d-flex flex-column h-100">
+
+<header>
+			<div class="mt-2 p-3 bg-secondary text-white rounded">
+				<h2 style="text-align: center; color: turquoise">
+					Hamilton Homes
+				</h2>
+			</div>
+		</header>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">Hamilton Homes</a>
+				<button
+					class="navbar-toggler"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navbarNav"
+					aria-controls="navbarNav"
+					aria-expanded="false"
+					aria-label="Toggle navigation"
+				>
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a
+								class="nav-link"
+								aria-current="page"
+								href="home.html"
+								>Home</a
+							>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Search</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Map</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Calculators</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link  active" href="#">Realtors</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Login</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+  <h1>Realtors</h1>
+  <h2>Local Realtor Listing</h2>
+  <table class="table">
+    <tr>
+      <th scope="col">ID <a href="/sortedByIDAsc"><i class="bi bi-sort-up"></i></a><a href="/sortedByIDDesc"> <i class="bi bi-sort-down"></i></a></th>
+      <th scope="col">First Name <a href="/sortedByFNameAsc"><i class="bi bi-sort-up"></i></a><a href="/sortedByFNameDesc"> <i class="bi bi-sort-down"></i></a></th>
+      <th scope="col">Last Name <a href="/sortedByLNameAsc"><i class="bi bi-sort-up"></i></a><a href="/sortedByLNameDesc"> <i class="bi bi-sort-down"></i></a></th>
+      <th scope="col">Specialties <a href="/sortedBySpecialtiesAsc"><i class="bi bi-sort-up"></i></a><a href="/sortedBySpecialtiesDesc"> <i class="bi bi-sort-down"></i></a></th>
+      <th scope="col">Delete </th>
+      <th scope="col">Update </th>
+      <th scope="col">Likes</th>
+    </tr>
+    {{#realtors}}
+    <tr>
+      <td>{{rowid}}</td>
+      <td>{{firstname}}</td>
+      <td>{{lastname}}</td>
+      <td>{{specialties}}</td>
+      <td><a href="/delete/{{rowid}}">D</a></td>
+      <td><a href="/updateform/{{rowid}}">U</a></td>
+      <td><a href="/like/{{rowid}}"><i class="bi bi-hand-thumbs-up"></i></a>{{likes}}</td>
+    </tr>
+    {{/realtors}}
+  </table>
+  <p><a href="/addform">Add realtor</a>
+  <p><a href="/layoff/{{rowid}}">Layoff realtor</a>
+  <p><a href="/random">Random realtor</a>
+  {{#addrealtor}}
+    <form id="addRealtor" action="/addrealtor">
+      	<label for="firstname">First Name</label>
+		{{^fNameErr}}
+      	<input type="text" class="form-control" name="firstname" value="{{formdata.firstname}}"> <br />
+	  {{/fNameErr}}
+	  {{#fNameErr}}
+	  	<input type="text" class="form-control is-invalid" name="firstname"> <br />
+	  {{/fNameErr}}
+      <label for="lastname">Last Name</label>
+	  {{^lNameErr}}
+      <input type="text" class="form-control" name="lastname" value="{{formdata.lastname}}"> <br />
+	  {{/lNameErr}}
+	  {{#lNameErr}}
+      <input type="text" class="form-control is-invalid" name="lastname"> <br />
+	  {{/lNameErr}}
+      <label for="specialties">Specialities</label>
+	  {{^specialtiesErr}}
+      <input type="text" class="form-control" name="specialties" value="{{formdata.specialties}}"> <br />
+	  {{/specialtiesErr}}
+	  {{#specialtiesErr}}
+      <input type="text" name="specialties" class="form-control is-invalid"> <br />
+	  {{/specialtiesErr}}
+      <label for="likes">Likes</label>
+      <input type="text" name="likes" value=0> <br />
+      <input type="submit">
+      </form>
+	  
+	  
+  {{/addrealtor}}
+  {{#updaterealtor}}
+    <form id="updateRealtor" action="/updaterealtor/{{updateid}}">
+			<label for="firstname">First Name</label>
+			{{^fNameErr}}
+			<input type="text" class="form-control" value="{{formdata.firstname}}" name="firstname"> <br />
+			{{/fNameErr}}
+			{{#fNameErr}}
+			<input type="text" class="form-control is-invalid" name="firstname"> <br />
+			{{/fNameErr}}
+			<label for="lastname">Last Name</label>
+			{{^lNameErr}}
+			<input type="text" class="form-control" value="{{formdata.lastname}}" name="lastname"> <br />
+			{{/lNameErr}}
+			{{#lNameErr}}
+			<input type="text" class="form-control is-invalid" name="lastname"> <br />
+			{{/lNameErr}}
+			<label for="specialties">Specialties</label>
+			{{^specialtiesErr}}
+			<input type="text" class="form-control" value="{{formdata.specialties}}" name="specialties"> <br />
+			{{/specialtiesErr}}
+			{{#specialtiesErr}}
+			<input type="text" class="form-control is-invalid" name="specialties"> <br />
+			{{/specialtiesErr}}
+			<label for="likes">Likes</label>
+			<input type="text" value="{{formdata.likes}}" name="likes"> <br />
+			<input type="submit">
+    </form>
+  {{/updaterealtor}}
+  {{#dispError}}
+		<div class="alert alert-danger" id="alertBox"role="alert"><ul>
+			{{#fNameErr}}
+				<li>First Name cannot be blank</li>
+			{{/fNameErr}}
+			{{#lNameErr}}
+				<li>Last Name cannot be blank</li>
+			{{/lNameErr}}
+			{{#specialtiesErr}}
+				<li>Specialities cannot be blank</li>
+			{{/specialtiesErr}}
+		</ul></div>
+	  {{/dispError}}
+</body>
+</html>

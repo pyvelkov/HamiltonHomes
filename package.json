@@ -1,5 +1,16 @@
 {
+  "name": "mvc_example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.ctrl.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.3",
+    "mustache-express": "^1.3.2",
+    "sqlite3": "^5.0.2"
   }
 }
